@@ -1,0 +1,22 @@
+
+
+spring:
+    application:
+        name: yzj-registry-qa
+    security:
+        user:
+          name: qa
+          password: qa
+
+eureka:
+    datacenter: SpringCloud-Eureka
+    environment: qa
+    instance:
+        hostname: localhost
+        instanceId: ${spring.application.name}:${eureka.instance.hostname}:${spring.application.instance_id:${server.port}}
+        ip-address: 172.16.1.21 #指定本服务ip
+    client:
+        serviceUrl:
+            defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
+
+

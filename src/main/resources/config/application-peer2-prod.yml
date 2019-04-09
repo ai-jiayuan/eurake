@@ -1,0 +1,31 @@
+
+
+spring:
+    application:
+        name: yzj-registry-peer2-prod
+    security:
+        user:
+          name: prod
+          password: prod
+
+eureka:
+    datacenter: SpringCloud-Eureka
+    environment: prod
+    instance:
+        registry-sync-retry-wait-ms: 500 #当eureka服务器启动时获取其他服务器的注册信息失败时，会再次尝试获取，期间需要等待的时间，默认为30 * 1000毫秒
+        lease-expiration-duration-in-seconds: 10 #Eureka服务器在接收到实例的最后一次发出的心跳后，需要等待多久才可以将此实例删除，默认为90秒
+        lease-renewal-interval-in-seconds: 5  #默认服务续约时间为30S
+        hostname: 192.168.1.200
+        instance-id: ${spring.application.name}:${eureka.instance.hostname}:${spring.application.instance_id:${server.port}}
+        ip-address: 192.168.1.200 #指定本服务ip
+    client:
+        serviceUrl:
+            defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@192.168.1.100:${server.port}/eureka/
+        register-with-eureka: true #向eureka注册自己
+        fetch-registry: true #从Eureka获取注册信息
+        instance-info-replication-interval-seconds: 10 #复制实例变化信息到eureka服务器所需要的时间间隔（s），默认为30秒
+        registry-fetch-interval-seconds: 10 #默认客户端清单更新时间为30秒（每个客户端如不自行配置，默认为30秒）
+        eureka-service-url-poll-interval-seconds: 60 #轮询Eureka服务端地址变更的时间间隔，默认为300秒，与配置中心结合动态刷新s
+    server:
+        peer-eureka-nodes-update-interval-seconds: 30 #集群里eureka节点的变化信息更新的时间间隔
+
