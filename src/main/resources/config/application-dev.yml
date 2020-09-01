@@ -2,7 +2,7 @@
 
 spring:
     application:
-        name: yzj-registry-dev
+        name: xl-registry-dev
     security:
         user:
           name: dev
@@ -14,7 +14,7 @@ eureka:
     instance:
         hostname: localhost
         instanceId: ${spring.application.name}:${eureka.instance.hostname}:${spring.application.instance_id:${server.port}}
-        ip-address: 192.168.1.154 #指定本服务ip
+        ip-address: 192.168.1.5 #指定本服务ip
     client:
         serviceUrl:
             defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/

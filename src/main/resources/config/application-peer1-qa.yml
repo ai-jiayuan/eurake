@@ -1,31 +1,28 @@
-
-
 spring:
     application:
-        name: xl-registry-peer2-prod
+        name: xl-registry-peer1-qa
     security:
         user:
-          name: prod
-          password: prod
+          name: qa
+          password: qa
 
 eureka:
     datacenter: SpringCloud-Eureka
-    environment: prod
+    environment: qa
     instance:
-        registry-sync-retry-wait-ms: 500 #当eureka服务器启动时获取其他服务器的注册信息失败时，会再次尝试获取，期间需要等待的时间，默认为30 * 1000毫秒
         lease-expiration-duration-in-seconds: 10 #Eureka服务器在接收到实例的最后一次发出的心跳后，需要等待多久才可以将此实例删除，默认为90秒
         lease-renewal-interval-in-seconds: 5  #默认服务续约时间为30S
-        hostname: 172.17.232.1680
+        hostname: 192.168.1.1040
         instance-id: ${spring.application.name}:${eureka.instance.hostname}:${spring.application.instance_id:${server.port}}
-        ip-address: 172.17.232.1680 #指定本服务ip
+        ip-address: 192.168.1.1040 #指定本服务ip
     client:
         serviceUrl:
-            defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@172.17.153.183:${server.port}/eureka/
+            defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@192.168.1.105:${server.port}/eureka/
         register-with-eureka: true #向eureka注册自己
         fetch-registry: true #从Eureka获取注册信息
         instance-info-replication-interval-seconds: 10 #复制实例变化信息到eureka服务器所需要的时间间隔（s），默认为30秒
         registry-fetch-interval-seconds: 10 #默认客户端清单更新时间为30秒（每个客户端如不自行配置，默认为30秒）
         eureka-service-url-poll-interval-seconds: 60 #轮询Eureka服务端地址变更的时间间隔，默认为300秒，与配置中心结合动态刷新s
     server:
-        peer-eureka-nodes-update-interval-seconds: 30 #集群里eureka节点的变化信息更新的时间间隔
+        peer-eureka-nodes-update-interval-ms: 30000 #集群里eureka节点的变化信息更新的时间间隔
 

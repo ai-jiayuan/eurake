@@ -2,7 +2,7 @@
 
 spring:
     application:
-        name: yzj-registry-peer1-prod
+        name: xl-registry-peer1-prod
     security:
         user:
           name: prod
@@ -14,12 +14,12 @@ eureka:
     instance:
         lease-expiration-duration-in-seconds: 10 #Eureka服务器在接收到实例的最后一次发出的心跳后，需要等待多久才可以将此实例删除，默认为90秒
         lease-renewal-interval-in-seconds: 5  #默认服务续约时间为30S
-        hostname: 192.168.1.100
+        hostname: 172.17.153.1830
         instance-id: ${spring.application.name}:${eureka.instance.hostname}:${spring.application.instance_id:${server.port}}
-        ip-address: 192.168.1.100 #指定本服务ip
+        ip-address: 172.17.153.1830 #指定本服务ip
     client:
         serviceUrl:
-            defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@192.168.1.200:${server.port}/eureka/
+            defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@172.17.232.168:${server.port}/eureka/
         register-with-eureka: true #向eureka注册自己
         fetch-registry: true #从Eureka获取注册信息
         instance-info-replication-interval-seconds: 10 #复制实例变化信息到eureka服务器所需要的时间间隔（s），默认为30秒

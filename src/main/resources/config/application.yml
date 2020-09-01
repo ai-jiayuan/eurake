@@ -28,14 +28,14 @@ management:
 
 eureka:
     instance:
-        appname: yzj-registry #服务名，默认取 spring.application.name 配置值，如果没有则为 unknown
+        appname: xl-registry #服务名，默认取 spring.application.name 配置值，如果没有则为 unknown
         prefer-ip-address: true #不使用主机名来定义注册中心的地址，而使用IP地址的形式，如果设置了 eureka.instance.ip-address 属性，则使用该属性配置的IP，否则自动获取除环路IP外的第一个IP地址
     client:
         registerWithEureka: false # 实例是否在eureka服务器上注册自己的信息以供其他服务发现，默认为true
         fetchRegistry: false #此客户端是否获取eureka服务器注册表上的注册信息，默认为true
     server:
-        enable-self-preservation: false #不使用自我保护（自我保护默认开启，Eureka服务器15分钟内心跳成功比例低于85%，则触发自我保护机制，不剔除任何注册的服务信息，直至心跳成功数大于85%，本地频繁调试，故而关闭该功能）
-        eviction-interval-timer-in-ms: 15000 #扫描失效服务时间间隔（单位毫秒，默认60*1000）60秒
+        enableSelfPreservation: false #不使用自我保护（自我保护默认开启，Eureka服务器15分钟内心跳成功比例低于85%，则触发自我保护机制，不剔除任何注册的服务信息，直至心跳成功数大于85%，本地频繁调试，故而关闭该功能）
+        eviction-interval-timer-in-ms: 5000 #扫描失效服务时间间隔（单位毫秒，默认60*1000）60秒
         wait-time-in-ms-when-sync-empty: 0 #设置eureka server同步失败的等待时间，默认5分钟，在这期间它不向客户端提供服务注册信息
         a-sgcache-expiry-timeout-ms: 60000 #缓存ASG信息的到期时间，单位为毫秒，默认为10 * 60 * 1000
         renewal-threshold-update-interval-ms: 90000 #  阈值更新的时间间隔，单位为毫秒，默认为15 * 60 * 1000
